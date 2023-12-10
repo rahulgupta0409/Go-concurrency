@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package UserService;
+
+option go_package = ".;proto";
+
+message Message{
+    repeated MessageIds MessageIdList = 1;
+    string MessageString = 2;      
+}
+
+message MessageIds{
+    int32 MessageId = 1;
+}
+
+service UserService{
+    rpc CreateMessageForEveryUser(stream Message) returns (stream Message);
+    rpc GetMessageForOneUser(stream MessageIds) returns (stream Message);
+}
